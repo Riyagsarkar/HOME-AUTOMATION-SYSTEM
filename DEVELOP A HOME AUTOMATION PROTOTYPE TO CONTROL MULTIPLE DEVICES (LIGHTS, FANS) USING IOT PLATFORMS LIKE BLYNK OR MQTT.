@@ -1,0 +1,33 @@
+C++
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+char auth[] = "YOUR_BLYNK_AUTH_TOKEN";
+
+// Your WiFi credentials.
+char ssid[] = "YOUR_WIFI_SSID";
+char pass[] = "YOUR_WIFI_PASSWORD";
+
+const int relay1Pin = D1; // Relay 1 for Light 1
+const int relay2Pin = D2; // Relay 2 for Light 2
+const int relay3Pin = D3; // Relay 3 for Fan 1
+
+void setup()
+{
+  Serial.begin(115200);
+  Blynk.begin(auth, ssid, pass);
+}
+
+void loop()
+{
+  Blynk.run();
+
+  if (Blynk.virtualWrite(V0, 1)) { // V0 is a virtual pin for controlling Light 1
+    digitalWrite(relay1Pin, HIGH); 
+  } else {
+    digitalWrite(relay1Pin, LOW);
+  }
+
+  // ... (Add logic for controlling other devices using virtual pins) ...
+}
