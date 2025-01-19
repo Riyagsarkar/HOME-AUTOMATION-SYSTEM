@@ -1,0 +1,32 @@
+Python
+
+# This is a simplified example using Python and the `requests` library
+
+import requests
+
+# Define the IP address or hostname of the device you want to control
+DEVICE_IP = "192.168.1.100" 
+
+# Function to send a command to the device
+def send_command(command):
+  """
+  Sends a command to the device at the specified IP address.
+
+  Args:
+    command: The command to send to the device (e.g., "forward", "backward", "left", "right").
+
+  Returns:
+    The response from the device (if any).
+  """
+  url = f"http://{DEVICE_IP}/control"  # Replace with the actual URL on your device
+  data = {"command": command}
+  response = requests.post(url, json=data)
+  return response.json()
+
+# Example usage:
+if __name__ == "__main__":
+  response = send_command("forward")
+  print(response) 
+
+  response = send_command("left")
+  print(response)
